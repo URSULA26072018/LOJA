@@ -92,6 +92,15 @@ export function updatePageSEO(options: SEOOptions) {
     setMetaTag('og:image:width', '1200', true);
     setMetaTag('og:image:height', '630', true);
     setMetaTag('og:image:alt', title, true);
+
+    // Legacy / WhatsApp link rel="image_src" fallback
+    let linkImage = document.querySelector('link[rel="image_src"]') as HTMLLinkElement | null;
+    if (!linkImage) {
+      linkImage = document.createElement('link');
+      linkImage.setAttribute('rel', 'image_src');
+      document.head.appendChild(linkImage);
+    }
+    linkImage.setAttribute('href', image);
   }
 
   // 4. Twitter / X Card

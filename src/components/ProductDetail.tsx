@@ -95,8 +95,8 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({
   };
 
   const getProductShareUrl = () => {
-    const baseUrl = window.location.href.split('#')[0];
-    return `${baseUrl}#produto/${product.id}`;
+    const origin = typeof window !== 'undefined' ? window.location.origin : '';
+    return `${origin}/?p=${product.id}`;
   };
 
   const getShareMessage = () => {

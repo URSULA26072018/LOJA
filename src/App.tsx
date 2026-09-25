@@ -107,10 +107,16 @@ export default function App() {
       }
     });
 
-    // Check URL hash for direct deep linking (e.g. #produto/prod-1 or #admin)
-    const handleHashChange = () => {
+    // Check URL query and hash for direct deep linking (e.g. ?p=prod-1, #produto/prod-1, or #admin)
+    const handleUrlRoute = () => {
       const hash = window.location.hash;
-      if (hash.startsWith('#produto/')) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const queryProdId = urlParams.get('p') || urlParams.get('produto');
+
+      if (queryProdId) {
+        setSelectedProductId(queryProdId);
+        setCurrentView('detail');
+      } else if (hash.startsWith('#produto/')) {
         const prodId = hash.replace('#produto/', '');
         setSelectedProductId(prodId);
         setCurrentView('detail');
@@ -121,10 +127,12 @@ export default function App() {
       }
     };
 
-    handleHashChange();
-    window.addEventListener('hashchange', handleHashChange);
+    handleUrlRoute();
+    window.addEventListener('hashchange', handleUrlRoute);
+    window.addEventListener('popstate', handleUrlRoute);
     return () => {
-      window.removeEventListener('hashchange', handleHashChange);
+      window.removeEventListener('hashchange', handleUrlRoute);
+      window.removeEventListener('popstate', handleUrlRoute);
       unsubProducts();
       unsubCategories();
       unsubBanners();
