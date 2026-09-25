@@ -2782,7 +2782,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                   rows={3}
                   value={siteConfig.whatsappDefaultMessage}
                   onChange={(e) => setSiteConfig({ ...siteConfig, whatsappDefaultMessage: e.target.value })}
-                  placeholder="Olá! Estava navegando no Achados do Dia e gostaria de tirar algumas dúvidas..."
+                  placeholder="Olá! Estava navegando no Ofertas do Dia e gostaria de tirar algumas dúvidas..."
                   className="w-full px-4 py-2.5 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-900 focus:outline-none focus:border-orange-500"
                 />
               </div>
